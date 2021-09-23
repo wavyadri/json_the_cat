@@ -5,7 +5,6 @@ const fetchBreedDescription = (breedName, callback) => {
   request(`${URL}${breedName}`, (error, response, body) => {
     // edge case: request failed
     if (error) {
-      console.error('error:', error); // Print the error if one occurred
       return callback(error, null);
     }
 
@@ -14,7 +13,8 @@ const fetchBreedDescription = (breedName, callback) => {
     if (data[0]) {
       callback(null, data[0].description);
     } else {
-      console.log('Breed could not be found. Try again!');
+      return callback('Breed could not be found. Try again!', null);
+      // console.log('Breed could not be found. Try again!',);
     }
   });
 };
